@@ -1,0 +1,38 @@
+// Nombre y apellidos: 
+
+#include <iostream>
+
+using namespace std;
+	
+/*
+	Algoritmo para resolver un caso
+		En FAL escribimos una función aparte (debajo de este comentario)
+*/
+
+
+
+
+// Resolución de un caso de prueba, salvo ni no quedan más
+bool casoDePrueba() {
+	// Lectura de los datos de entrada
+	
+	if (caso_especial)	// es la marca del final de la entrada
+		return false;
+	else {
+
+		// Resolución del caso 
+			// Llamamos a la función que aplica el algoritmo 
+
+		// Escritura de la salida
+
+		return true;
+	}
+}
+
+int main() {
+
+	// Resolución de todos los casos
+	while (casoDePrueba());
+
+	return 0;	
+}
