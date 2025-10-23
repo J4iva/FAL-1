@@ -1,4 +1,3 @@
-// Nombre y apellidos: 
 
 #include <iostream>
 
@@ -8,35 +7,43 @@ using namespace std;
 	Algoritmo para resolver un caso
 		En FAL escribimos una función aparte (debajo de este comentario)
 */
-
-
-
-
-// Resolución de un caso de prueba, salvo ni no quedan más
-bool casoDePrueba() {
-	// Lectura de los datos de entrada
-		// Si están compuestos por más de un valor, leemos solamente el primero aquí
-    int n;
-    cin >> n;
-	if (!cin)	// no hay ningún dato (final de la entrada)
-		return false;
-	else {
-		// Lectura del resto de los datos de entrada
-			// Si quedó algo por leer, se continúa aquí la lectura
-
-		// Resolución del caso 
-			// Llamamos a la función que aplica el algoritmo 
-
-		// Escritura de la salida
-
-		return true;
+void base6(int n){
+	
+	if (n < 6){
+		cout << n;
+		return;
+	}else{
+		
+		base6(n/6);
+		cout << n%6;
+		
 	}
+
+}
+
+
+// Resolución de un caso de prueba
+void casoDePrueba() {
+
+	// Lectura de los datos de entrada
+	int n;
+	cin >> n;
+	// Resolución del caso 
+		// Llamamos a la función que aplica el algoritmo 
+	base6(n); 
+	cout << '\n';
+	// Escritura de la salida
 }
 
 int main() {
 
+	// Lectura del número de casos
+	int numCasos;
+	cin >> numCasos;
+	
 	// Resolución de todos los casos
-	while (casoDePrueba());
+	for (int i = 0; i < numCasos; ++i) 
+		casoDePrueba();
 
-	return 0;	
+	return 0;
 }
