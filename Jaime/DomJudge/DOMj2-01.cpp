@@ -9,7 +9,7 @@ using namespace std;
 		En FAL escribimos una función aparte (debajo de este comentario)
 */
 
-//Pre:{0<=n<j, j = (v)}
+//Pre:{0<=n<100.000, acum = sum(v)}
 bool contabilidad(int n, int const v[], int acum){
 
 
@@ -24,7 +24,8 @@ bool contabilidad(int n, int const v[], int acum){
     return false;
 
 }
-
+//{Post: sol = v[i] <=> acum - sum(v[i]) = v[i],
+// donde sum(v[i]) = \sum_{n=0}^{i} v[n]}
 
 
 // Resolución de un caso de prueba, salvo ni no quedan más
