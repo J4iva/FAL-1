@@ -8,28 +8,26 @@ using namespace std;
 	Algoritmo para resolver un caso
 		En FAL escribimos una función aparte (debajo de este comentario)
 */
-void prueba(int n, const char p[], int aux, int& acum, int a, int b){
-    
-    for (int i = a; i < b; i++){
-        if (p[i] != '0') aux++;
-    }
-    if (aux != 0){
-        acum++;
-
-        if (((b-a)/2)%2 == 0){
-            prueba(n, p, 0, acum, a, (b-a)/2+a);
-            prueba(n, p, 0, acum, (b-a)/2+a, b);
-        }else{
-            prueba(n, p, 0, acum, a, (b-a)/2+a+1);
-            prueba(n, p, 0, acum, (b-a)/2+a+1, b);
+int prueba(const char p[], int a, int b){
+    int aux = 0;
+    if (a == b-1)return 1;
+    else{
+        for (int i = a; i < b; i++){
+        if (p[i] == '1') aux++;
         }
 
-    }else {
-        acum = 1;
+        if (aux == 0) return 1;
+        else {
+            
+            if ((b-a)%2 == 0) return (prueba( p, a, ((b-a)/2)+a) + prueba(p, ((b-a)/2)+a, b))+1;
+            else return (prueba(p, a, (((b-a)/2)+a)+1) + prueba(p, (((b-a)/2)+a)+1, b))+1;
+
+
+        }
+
     }
 
 }
-
 
 
 // Resolución de un caso de prueba, salvo ni no quedan más
@@ -47,8 +45,8 @@ bool casoDePrueba() {
         if (n == 1) cout << "1" << '\n';
         else {
             int acum = 0;
-            prueba(n, p, 0, acum, 0, n);
-            cout << acum << '\n';
+            
+            cout << prueba( p, 0, n) << '\n';
 
 
         }
