@@ -14,58 +14,48 @@ struct FuncArray{
 		En FAL escribimos una función aparte (debajo de este comentario)
 */
 bool posibleGanar(int p, int i, int k);
+FuncArray modMatriz(int j);
 
-bool juegoCal(int n, int j, FuncArray const v, int p, int i, int k){
+bool juegoCal(int n, int j, FuncArray v){
 
 
+    if (n >= 30){
+        if (n == 31) return true;
+        else return false;
+    }else{
+        bool gana = 0;
 
-    while (i < 3){
-        while (p < 3){
-            if (v.arr[i][p]>0 && n+v.arr[i][p] < 31) return posibleGanar(p, i, k);//posible Ganar
-            else return juegoCal(n, j, v, p+1, i, 31);
-            
+        for (int i = 0; i < 3; i++){
+            for (int p = 0; p < 3; p++){
+                if (v.arr[i][p] && (v.arr[i][p] + n) < 31 && !gana) gana = !(juegoCal(v.arr[i][p] + n, v.arr[i][p], modMatriz(v.arr[i][p])));
+            }
         }
-        p=0;
-        i++;
+
+        return gana;
+
+
     }
+
     
-
-
-    return false;
-   }
+}
 
 
 
-FuncArray modMatriz(FuncArray v, int j){
-    
+FuncArray modMatriz(int j){
+
+    FuncArray v;
     int fila = 0, columna = 0;
 
-    if (j%3==0) columna = 2;
-    else if (j == 8 || 5 || 2) columna = 1;
-    else columna = 0;
-    
-    if (j>6) fila = 2;
-    else if (j>3) fila =1;
-    else fila = 0;
+    columna = (j-1)%3;
+    fila = (j-1)/3;
     
     for (int i = 0; i < 3; i++){
         for (int p = 0; p < 3; p++){
-            if (i == columna && p == fila || !(i == columna || p == fila)) v.arr[i][p] = 0;
+            if ((i == columna && p == fila) || !(i == columna || p == fila)) v.arr[p][i] = 0;
         }
     }
 
     return v;
-
-}
-
-bool posibleGanar(int p, int i, int k){
-    int d;
-    FuncArray newv;
-    int j = newv.arr[i][p];
-    newv = modMatriz(newv, j);
-    return !(juegoCal(k, j, newv, p, i, 31));
-
-
 
 }
 
@@ -78,11 +68,12 @@ void casoDePrueba() {
     cin >> n >> j;
 	// Resolución del caso 
     FuncArray v;
+    int p;
     // Llamamos a la función que aplica el algoritmo 
     
-    modMatriz(v, j);
+    v = modMatriz(j);
     
-    if (juegoCal(n, j, v, 0, 0, 31)) cout << "GANA" << '\n';
+    if (juegoCal(n, j, v)) cout << "GANA" << '\n';
     else cout << "PIERDE" << '\n';
 	// Escritura de la salida
 }
